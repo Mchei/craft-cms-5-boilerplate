@@ -1,31 +1,40 @@
-name: craft-cms
+name: studyadelaide
 type: craftcms
 docroot: web
 php_version: "8.2"
 webserver_type: nginx-fpm
 xdebug_enabled: false
-additional_hostnames: []
+additional_hostnames:
+- api
 additional_fqdns: []
 database:
     type: mysql
     version: "8.0"
 use_dns_when_possible: true
-web_environment: []
-
-router_http_port: "8080"
-router_https_port: "8443"
+project_tld: demo
+web_environment:
+  - VIRTUAL_HOST=studyadelaide.demo,api.studyadelaide.demo
+  - CRAFT_CMD_ROOT=/var/www/html
 
 composer_version: "2"
 nodejs_version: "22"
 
-mutagen_enabled: true
+performance_mode: mutagen
 upload_dirs:
   - web/assets
   - storage
 
+web_extra_exposed_ports:
+- name: nodejs
+  container_port: 3000
+  http_port: 2999
+  https_port: 3000
+
 webimage_extra_packages:
   - build-essential
   - libvips-dev
+
+
 
 # Key features of DDEV's config.yaml:
 
